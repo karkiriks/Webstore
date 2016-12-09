@@ -1,0 +1,15 @@
+<h1>{{title}}</h1>
+<h2>Our Products</h2>
+<ul class="products">
+  <li *ngFor="let product of products" [class.selected]="product === selectedProduct" (click)="onSelect(product)">
+    <span class="badge">{{product?.id}}</span> <span>{{product?.name}}</span>
+    <button class="delete" (click)="delete(product); $event.stopPropagation()">x</button>
+  </li>
+</ul>
+<div>
+  <label>Product name:</label> <input #productName />
+  <button (click)="add(productName.value); productName.value=''">
+    Add
+  </button>
+</div>
+<my-product-detail [product]="selectedProduct" (deleteRequest)="deleteProduct($event)"></my-product-detail>
